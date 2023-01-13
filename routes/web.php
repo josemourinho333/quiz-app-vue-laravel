@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuizController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -38,6 +39,8 @@ Route::get('/quizzes/{id}', function ($id) {
 Route::get('/quizzes', function () {
     return Inertia::render('Quizzes');
 })->middleware(['auth', 'verified'])->name('quizzes');
+
+Route::get('/test', [QuizController::class, 'index']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
