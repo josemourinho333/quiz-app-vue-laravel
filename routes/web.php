@@ -22,7 +22,7 @@ Route::get('/', function () {
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        'phpVersion' => PHP_VERSION
     ]);
 });
 
@@ -40,7 +40,6 @@ Route::get('/quizzes', function () {
     return Inertia::render('Quizzes');
 })->middleware(['auth', 'verified'])->name('quizzes');
 
-Route::get('/test', [QuizController::class, 'index']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -3,12 +3,18 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
 import QuizBox from '@/Components/QuizBox.vue';
 import QuizList from '@/Components/QuizList.vue';
 
+defineProps({
+    canLogin: Boolean,
+    canRegister: Boolean,
+    laravelVersion: String,
+    phpVersion: String,
+});
+
 </script>
 <template>
     <Head title="Quizzes" />
 
     <div class="flex flex-row">
-
         <div class="min-h-screen basis-1/2 flex flex-col justify-center items-center bg-amber-200">
             <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Quiz App</h1>
             <p class="mb-6 text-lg text-center font-normal text-gray-800 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Full stack quiz app built with Laravel and Vue.js</p>
