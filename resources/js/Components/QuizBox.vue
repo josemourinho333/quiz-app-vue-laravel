@@ -20,7 +20,6 @@ defineProps({
     id: Number,
     title: String,
     description: String,
-    quiz: Object,
 });
 
 </script>
