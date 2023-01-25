@@ -20,4 +20,11 @@ class QuizController extends Controller
                 ->get();
         return response()->json($quizzes);
     }
+
+    // get 1 quiz
+    public function find($id)
+    {
+        $quizzes = Quiz::find($id);
+        return $quizzes;
+    }
 }

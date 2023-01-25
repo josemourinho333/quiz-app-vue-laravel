@@ -1,25 +1,11 @@
 <script setup>
-import { ref, onMounted } from 'vue';
 import { Link } from '@inertiajs/inertia-vue3';
-
-const count = ref(0);
-
-function increment() {
-    count.value++;
-}
-
-function decrement() {
-    count.value--;
-}
-
-onMounted(() => {
-    console.log(`The initial count on mounted is ${count.value}`);
-});
 
 defineProps({
     id: Number,
     title: String,
     description: String,
+    quiz: Object,
 });
 
 </script>

@@ -5,6 +5,7 @@ use App\Http\Controllers\QuizController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\Quiz;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +32,21 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/quizzes/{id}', function ($id) {
+    $quiz = Quiz::with([
+        'questions' => function ($query) {
+            $query->select('*')
+                ->with([
+                    'answers' => function ($query) {
+                                $query->select('*');
+                            }
+                ]);
+        }
+    ])
+    ->where('id', $id)
+    ->first();
     return Inertia::render('Quizzes/Show', [
-        'id' => $id
+        'id' => $id,
+        'quiz' => $quiz,
     ]);
 })->name('quiz');
 

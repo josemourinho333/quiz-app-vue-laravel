@@ -9,7 +9,6 @@ onMounted(() => {
     axios.get('/api/quizzes')
         .then((res) => {
             quizzes.value = res.data;
-            console.log('quizzes', quizzes);
         })
         .catch((err) => {
             console.log('err', err);
@@ -20,7 +19,7 @@ onMounted(() => {
 
 <template>
     <div class="h-full flex flex-col gap-5 p-5 overflow-y-auto" v-if="quizzes && quizzes.length > 0">
-        <QuizBox v-for="quiz in quizzes" :key="quiz.id" :id="quiz.id" :title="quiz.name" :description="quiz.description"/>
+        <QuizBox v-for="quiz in quizzes" :key="quiz.id" :id="quiz.id" :title="quiz.name" :description="quiz.description" :quiz="quiz"/>
     </div>
     <div v-else>
         <p>There are no quizzes available yet.</p>
