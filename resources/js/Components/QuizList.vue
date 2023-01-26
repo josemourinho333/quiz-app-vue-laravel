@@ -22,6 +22,6 @@ onMounted(() => {
         <QuizBox v-for="quiz in quizzes" :key="quiz.id" :id="quiz.id" :title="quiz.name" :description="quiz.description" :quiz="quiz"/>
     </div>
     <div v-else>
-        <p>There are no quizzes available yet.</p>
+        <p>Loading...</p>
     </div>
 </template>
