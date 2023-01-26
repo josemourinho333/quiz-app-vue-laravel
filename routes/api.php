@@ -22,3 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/quizzes', [QuizController::class, 'index']);
 
+Route::post('/submitQuiz', [QuizController::class, 'store']);
+

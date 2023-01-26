@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue';
 import QuizQuestion from '@/Components/QuizQuestion.vue';
 import QuizHeader from '@/Components/QuizHeader.vue';
+import axios from 'axios';
 
 defineProps({
     id: Number | String,
@@ -29,6 +30,13 @@ const clickAnswerHandler = (quizId, questionId, answer, correctAnswer) => {
 
 const submitHandler = () => {
     console.log('final values', quizAnswers.value);
+    axios.post('/api/submitQuiz', { quizAnswers: quizAnswers.value })
+        .then((res) => {
+            console.log('res', res);
+        })
+        .catch((err) => {
+            console.log('err', err);
+        });
 };
 
 </script>
