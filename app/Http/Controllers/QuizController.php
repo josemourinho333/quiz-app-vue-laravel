@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Quiz;
+use App\Models\Result;
+use App\Models\UsersAnswer;
 
 class QuizController extends Controller
 {
@@ -31,11 +33,29 @@ class QuizController extends Controller
     // store quiz
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'quizAnswers' => 'required'
-        ]);
-        // make a migration for results table and user_answers table
-        // split the $request here so two can be added according to their tables
-        // once new entries are added, redirect with the information so we can display it on browser for the user
+        $data = $request->all();
+        $quizAnswers = $data['quizAnswers'];
+
+        $result = [
+            'quizId' => $quizAnswers['quizId'],
+            'score' => $quizAnswers['score'],
+        ];
+
+        $newResult = new Result();
+        $newResult->quiz_id = $result['quizId'];
+        $newResult->score = $result['score'];
+        $newResult->save();
+
+        foreach ($quizAnswers['answers'] as $answer)
+        {
+            $newAnswer = new UsersAnswer();
+            $newAnswer->result_id = $newResult->id;
+            $newAnswer->question_id = $answer['questionId'];
+            $newAnswer->answer = $answer['answer'];
+            $newAnswer->correct = $answer['correctAnswer'];
+            $newAnswer->save();
+        };
+
+        return response()->json($newResult);
     }
 }

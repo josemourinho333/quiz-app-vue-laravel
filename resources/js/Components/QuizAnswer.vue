@@ -12,8 +12,8 @@ defineProps({
 
 </script>
 <template>
-    <div class="flex flex-row gap-x-3 items-center font-bold text-xl" @click="clickAnswerHandler(quizId, questionId, option, correct)">
-        <input type="radio" :id="option" :name="question" :value="option">
+    <div class="flex flex-row gap-x-3 items-center font-bold text-xl" >
+        <input type="radio" :id="option" :name="question" :value="option" @click="clickAnswerHandler(quizId, questionId, option, correct)">
         <label :for="option">{{ option }}</label>
     </div>
 </template>

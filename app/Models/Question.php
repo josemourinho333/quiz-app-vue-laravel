@@ -13,8 +13,8 @@ class Question extends Model
         return $this->hasMany(Answer::class);
     }
 
-    public function users_answers()
+    public function usersAnswers()
     {
-        return $this->hasMany(Users_Answer::class);
+        return $this->hasMany(UsersAnswer::class);
     }
 }

@@ -14,13 +14,21 @@ const quizAnswers = ref({
     answers: [],
 });
 
+onMounted(() => {
+    quizAnswers.value = {
+        quizId: 0,
+        answers: [],
+    }
+});
+
 const clickAnswerHandler = (quizId, questionId, answer, correctAnswer) => {
     const oneAnswer = {
         questionId,
         answer,
         correctAnswer,
     };
-    const updatedAnswers = [...quizAnswers.value.answers, oneAnswer];
+    const filteredAnswers = quizAnswers.value.answers.filter((answer) => answer.questionId !== questionId);
+    const updatedAnswers = [...filteredAnswers, oneAnswer];
     const userAnswers = {
         quizId,
         answers: [...updatedAnswers]
@@ -29,10 +37,23 @@ const clickAnswerHandler = (quizId, questionId, answer, correctAnswer) => {
 };
 
 const submitHandler = () => {
-    console.log('final values', quizAnswers.value);
+    const correctAnswers = quizAnswers.value.answers.filter((answer) => answer.correctAnswer === true).length;
+    const totalAnswers = quizAnswers.value.answers.length;
+    const quizScore = (correctAnswers / totalAnswers) * 100;
+    const updatedQuizSubmission = {
+        score: quizScore,
+        ...quizAnswers.value,
+    };
+
+    quizAnswers.value = {
+        ...updatedQuizSubmission,
+    };
+
     axios.post('/api/submitQuiz', { quizAnswers: quizAnswers.value })
         .then((res) => {
             console.log('res', res);
+            localStorage.setItem('quizResult', JSON.stringify(res.data));
+            window.location.href = '/completed';
         })
         .catch((err) => {
             console.log('err', err);

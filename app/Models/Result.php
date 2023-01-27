@@ -9,8 +9,8 @@ class Result extends Model
 {
     use HasFactory;
 
-    public function users_answers()
+    public function usersAnswers()
     {
-        return $this->hasMany(Users_Answer::class);
+        return $this->hasMany(UsersAnswer::class);
     }
 }

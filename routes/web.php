@@ -54,6 +54,10 @@ Route::get('/quizzes', function () {
     return Inertia::render('Quizzes');
 })->middleware(['auth', 'verified'])->name('quizzes');
 
+Route::get('/completed', function () {
+    return Inertia::render('Completed');
+})->name('completed');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
