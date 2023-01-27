@@ -9,7 +9,7 @@ onMounted(() => {
     } else {
         const data = JSON.parse(localStorage.getItem('quizResult'));
         quizResult.value = {...data};
-        console.log('quizResult', quizResult.value);
+        localStorage.removeItem('quizResult');
     }
 });
 
