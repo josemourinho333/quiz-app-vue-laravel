@@ -50,9 +50,9 @@ Route::get('/quizzes/{id}', function ($id) {
     ]);
 })->name('quiz');
 
-Route::get('/quizzes', function () {
-    return Inertia::render('Quizzes');
-})->middleware(['auth', 'verified'])->name('quizzes');
+Route::get('/new', function () {
+    return Inertia::render('New');
+})->name('new');
 
 Route::get('/completed', function () {
     return Inertia::render('Completed');
