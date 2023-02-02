@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Quiz;
+use App\Models\Question;
+use App\Models\Answer;
 use App\Models\Result;
 use App\Models\UsersAnswer;
 use Illuminate\Support\Facades\Log;
@@ -63,14 +65,42 @@ class QuizController extends Controller
     public function create(Request $request)
     {
         $data = $request->all();
-        $newQuiz = $data['newQuiz'];
+        $quizInfo = $data['newQuiz'];
 
-        Log::info($newQuiz);
-        $new = new Quiz();
-        $new->name = $newQuiz['quizName'];
-        $new->description = 'Placeholder Description';
-        $new->save();
+        $newQuiz = new Quiz();
+        $newQuiz->name = $quizInfo['quizName'];
+        $newQuiz->description = 'Placeholder Description';
+        $newQuiz->save();
 
-        
+        $newQuestion = new Question();
+        $newQuestion->quiz_id = $newQuiz->id;
+        $newQuestion->title = $quizInfo['questionList'][0]['question'];
+        $newQuestion->save();
+
+        $newWrongAnswerOne = new Answer();
+        $newWrongAnswerOne->question_id = $newQuestion->id;
+        $newWrongAnswerOne->option = $quizInfo['questionList'][0]['wrongAnswerOne']['answer'];
+        $newWrongAnswerOne->correct = $quizInfo['questionList'][0]['wrongAnswerOne']['correct'];
+        $newWrongAnswerOne->save();
+
+        $newWrongAnswerTwo = new Answer();
+        $newWrongAnswerTwo->question_id = $newQuestion->id;
+        $newWrongAnswerTwo->option = $quizInfo['questionList'][0]['wrongAnswerTwo']['answer'];
+        $newWrongAnswerTwo->correct = $quizInfo['questionList'][0]['wrongAnswerTwo']['correct'];
+        $newWrongAnswerTwo->save();
+
+        $newWrongAnswerThree = new Answer();
+        $newWrongAnswerThree->question_id = $newQuestion->id;
+        $newWrongAnswerThree->option = $quizInfo['questionList'][0]['wrongAnswerThree']['answer'];
+        $newWrongAnswerThree->correct = $quizInfo['questionList'][0]['wrongAnswerThree']['correct'];
+        $newWrongAnswerThree->save();
+
+        $newCorrectAnswer = new Answer();
+        $newCorrectAnswer->question_id = $newQuestion->id;
+        $newCorrectAnswer->option = $quizInfo['questionList'][0]['correctAnswer']['answer'];
+        $newCorrectAnswer->correct = $quizInfo['questionList'][0]['correctAnswer']['correct'];
+        $newCorrectAnswer->save();
+
+        return 'Success';
     }
 }

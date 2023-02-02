@@ -68,7 +68,7 @@ const createHandler = () => {
     console.log('new quiz', newQuiz.value);
     axios.post('/api/createQuiz', { newQuiz: newQuiz.value })
         .then((res) => {
-            console.log('res', res);
+            window.location.href = '/';
         })
         .catch((err) => {
             console.log('err', err);

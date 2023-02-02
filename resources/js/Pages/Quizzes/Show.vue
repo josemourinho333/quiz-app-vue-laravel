@@ -51,7 +51,6 @@ const submitHandler = () => {
 
     axios.post('/api/submitQuiz', { quizAnswers: quizAnswers.value })
         .then((res) => {
-            console.log('res', res);
             localStorage.setItem('quizResult', JSON.stringify(res.data));
             window.location.href = '/completed';
         })
