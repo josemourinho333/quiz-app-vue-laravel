@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Quiz;
 use App\Models\Result;
 use App\Models\UsersAnswer;
+use Illuminate\Support\Facades\Log;
 
 class QuizController extends Controller
 {
@@ -30,7 +31,7 @@ class QuizController extends Controller
         return $quizzes;
     }
 
-    // store quiz
+    // store users quiz submission
     public function store(Request $request)
     {
         $data = $request->all();
@@ -57,5 +58,19 @@ class QuizController extends Controller
         };
 
         return response()->json($newResult);
+    }
+
+    public function create(Request $request)
+    {
+        $data = $request->all();
+        $newQuiz = $data['newQuiz'];
+
+        Log::info($newQuiz);
+        $new = new Quiz();
+        $new->name = $newQuiz['quizName'];
+        $new->description = 'Placeholder Description';
+        $new->save();
+
+        
     }
 }

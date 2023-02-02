@@ -24,3 +24,4 @@ Route::get('/quizzes', [QuizController::class, 'index']);
 
 Route::post('/submitQuiz', [QuizController::class, 'store']);
 
+Route::post('/createQuiz', [QuizController::class, 'create']);
