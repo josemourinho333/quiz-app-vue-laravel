@@ -69,7 +69,7 @@ class QuizController extends Controller
 
         $newQuiz = new Quiz();
         $newQuiz->name = $quizInfo['quizName'];
-        $newQuiz->description = 'Placeholder Description';
+        $newQuiz->description = $quizInfo['quizDescription'];
         $newQuiz->save();
 
         foreach ($quizInfo['questionList'] as $answer)
@@ -79,7 +79,7 @@ class QuizController extends Controller
             $newQuestion->quiz_id = $newQuiz->id;
             $newQuestion->title = $answer['question'];
             $newQuestion->save();
-            
+
             $newWrongAnswerOne = new Answer();
             $newWrongAnswerOne->question_id = $newQuestion->id;
             $newWrongAnswerOne->option = $answer['wrongAnswerOne']['answer'];
