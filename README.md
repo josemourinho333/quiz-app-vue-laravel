@@ -2,7 +2,7 @@
 
 ## About
 
-Super simple quiz app where users can take quizzes and see how they did. They can continously take the quiz for better marks. The results will be saved in the database. Users can also create their own quiz which will be saved in the database.
+Super simple quiz app where users can take quizzes and see how they did. They can continously take the quiz for better marks. The results will be saved in the database. Users can also create their own quiz which will be saved in the database. Built with Laravel, Vue, and Postgres.
 
 ## Getting Started
 
