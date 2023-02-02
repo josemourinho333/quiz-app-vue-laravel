@@ -72,34 +72,39 @@ class QuizController extends Controller
         $newQuiz->description = 'Placeholder Description';
         $newQuiz->save();
 
-        $newQuestion = new Question();
-        $newQuestion->quiz_id = $newQuiz->id;
-        $newQuestion->title = $quizInfo['questionList'][0]['question'];
-        $newQuestion->save();
+        foreach ($quizInfo['questionList'] as $answer)
+        {
 
-        $newWrongAnswerOne = new Answer();
-        $newWrongAnswerOne->question_id = $newQuestion->id;
-        $newWrongAnswerOne->option = $quizInfo['questionList'][0]['wrongAnswerOne']['answer'];
-        $newWrongAnswerOne->correct = $quizInfo['questionList'][0]['wrongAnswerOne']['correct'];
-        $newWrongAnswerOne->save();
+            $newQuestion = new Question();
+            $newQuestion->quiz_id = $newQuiz->id;
+            $newQuestion->title = $answer['question'];
+            $newQuestion->save();
+            
+            $newWrongAnswerOne = new Answer();
+            $newWrongAnswerOne->question_id = $newQuestion->id;
+            $newWrongAnswerOne->option = $answer['wrongAnswerOne']['answer'];
+            $newWrongAnswerOne->correct = $answer['wrongAnswerOne']['correct'];
+            $newWrongAnswerOne->save();
 
-        $newWrongAnswerTwo = new Answer();
-        $newWrongAnswerTwo->question_id = $newQuestion->id;
-        $newWrongAnswerTwo->option = $quizInfo['questionList'][0]['wrongAnswerTwo']['answer'];
-        $newWrongAnswerTwo->correct = $quizInfo['questionList'][0]['wrongAnswerTwo']['correct'];
-        $newWrongAnswerTwo->save();
+            $newWrongAnswerTwo = new Answer();
+            $newWrongAnswerTwo->question_id = $newQuestion->id;
+            $newWrongAnswerTwo->option = $answer['wrongAnswerTwo']['answer'];
+            $newWrongAnswerTwo->correct = $answer['wrongAnswerTwo']['correct'];
+            $newWrongAnswerTwo->save();
 
-        $newWrongAnswerThree = new Answer();
-        $newWrongAnswerThree->question_id = $newQuestion->id;
-        $newWrongAnswerThree->option = $quizInfo['questionList'][0]['wrongAnswerThree']['answer'];
-        $newWrongAnswerThree->correct = $quizInfo['questionList'][0]['wrongAnswerThree']['correct'];
-        $newWrongAnswerThree->save();
+            $newWrongAnswerThree = new Answer();
+            $newWrongAnswerThree->question_id = $newQuestion->id;
+            $newWrongAnswerThree->option = $answer['wrongAnswerThree']['answer'];
+            $newWrongAnswerThree->correct = $answer['wrongAnswerThree']['correct'];
+            $newWrongAnswerThree->save();
 
-        $newCorrectAnswer = new Answer();
-        $newCorrectAnswer->question_id = $newQuestion->id;
-        $newCorrectAnswer->option = $quizInfo['questionList'][0]['correctAnswer']['answer'];
-        $newCorrectAnswer->correct = $quizInfo['questionList'][0]['correctAnswer']['correct'];
-        $newCorrectAnswer->save();
+            $newCorrectAnswer = new Answer();
+            $newCorrectAnswer->question_id = $newQuestion->id;
+            $newCorrectAnswer->option = $answer['correctAnswer']['answer'];
+            $newCorrectAnswer->correct = $answer['correctAnswer']['correct'];
+            $newCorrectAnswer->save();
+        };
+
 
         return 'Success';
     }
